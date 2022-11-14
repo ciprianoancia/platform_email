@@ -1,0 +1,49 @@
+title: Platform Email - Bounce_Rate
+class: Drutiny\Audit\PlatformEmail
+name: Platform_Email:Bounce_Rate
+tags:
+    - Platform Email
+description: |
+    Platform_Email to verify the bounce rate for the appliction: {acquia.cloud.application.uuid}
+parameters:
+    query: "_source=\"Email Service CloudWatch\" metric=Reputation.BounceRate statistic=average ses:configuration-set=@acquia.cloud.application.uuid"
+    metrics:
+        - reputation.bouncerate
+    y-axis-label: Reputation Bouncerate
+    expression: NOTICE
+tags: []
+success: |-
+    {{ graph|chart }}
+    
+    {{ table_headers|join('|') }}
+    --------------------------- |
+    {% for row in table_rows %}
+      {{ row|join('|') }}
+    {%endfor %}
+remediation: 'TODO – The best way to prevent malicious users from abusing your web-based forms is to use a CAPTCHA. A CAPTCHA is a test that makes the individual submitting the form prove that they are a human, rather than a bot or a script. We cannot help you add a CAPTCHA to your site, but you may find the following resources to be helpful:
+-- http://en.wikipedia.org/wiki/CAPTCHA
+-- https://www.google.com/recaptcha
+  '
+failure: 'TODO Fail text here '
+type: data
+warning: 'TODO warning text here '
+build_parameters: []
+language: en
+chart:
+    bounce_rate:
+        type: line
+        labels: tr td:first-child
+        hide-table: true
+        height: 250
+        width: 400
+        stacked: false
+        title: Historical Bouncerate
+        series:
+            - tr td:nth-child(3)
+        series-labels:
+            - tr th:nth-child(3)
+        y-axis: Reputation Bouncerate
+        legend: bottom
+        colors: []
+depends: []
+
