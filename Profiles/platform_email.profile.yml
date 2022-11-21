@@ -1,0 +1,5 @@
+title: Platform Email
+description: Platform Email
+policies:
+  Platform_Email:Bounce_Rate:
+    severity: critical
